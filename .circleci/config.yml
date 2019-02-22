@@ -1,0 +1,36 @@
+# Python CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: continuumio/miniconda3
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - run:
+          name: setup environment
+          command: |
+                pip install asv
+                asv machine --y
+
+      # run tests!
+      - run:
+          name: Run tests
+          command: |
+            asv continuous HEAD~1 HEAD
+
+      - store_artifacts:
+          path: test-reports
+          destination: test-reports
+          
+
+
+
+
+
