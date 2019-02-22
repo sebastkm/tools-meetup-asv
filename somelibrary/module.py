@@ -1,8 +1,9 @@
+import numpy
+
+
 def somefunc():
     x = 0
-    for i in range(100_000):
-        x += i
-    return x
-
+    x = numpy.arange(100_000)
+    return x.sum()
 
 
